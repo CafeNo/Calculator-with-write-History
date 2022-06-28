@@ -1,0 +1,40 @@
+def calculator(num1, operator, num2): 
+    ans = [] # list to store the answer
+
+    if operator == "+": 
+        ans.append(num1 + num2)
+    elif operator == "-":
+        ans.append(num1 - num2)
+    elif operator == "*":
+        ans.append(num1 * num2)
+    elif operator == "/":
+        ans.append(num1 / num2)
+    else:
+        print("Invalid operator")
+
+    ans = ' '.join(map(str, ans)) # convert list to string
+    return ans # return ans
+
+
+def main():
+    print("\n\n************************************************ Welcome to calculator ************************************************")
+    print('Calculator Example: {first number} {operator} {second number} then if you want to exit press "q"')
+    
+    while True:
+        try:
+            inMsg = input('Calculator: ').split() # split input string into list (split by ' ')
+            num1 = int(inMsg[0]) # split first number [0]
+            operator = inMsg[1] # split operator [1]
+            num2 = int(inMsg[2]) # split second number [2]
+
+            print(f'{num1} {operator} {num2} = {calculator(num1, operator, num2)}') # print answer
+        except IndexError:
+            print('Invalid input')
+
+
+        with open ('history_calculator.txt', 'a') as file: # write history to history.txt
+            file.write(str(f'Solution: {num1} {operator} {num2} = {calculator(num1, operator, num2)}\n')) # write file to history.txt
+            file.close() # close file
+
+
+main()
